@@ -1,0 +1,34 @@
+#ifndef SNAKEPART_H
+#define SNAKEPART_H
+
+#include <QTimer>
+#include <QTime>
+#include <QGraphicsScene>
+#include <QGraphicsRectItem>
+
+#include "coordinates.h"
+
+class snakePart: public QObject, public QGraphicsRectItem
+{
+    Q_OBJECT
+
+private:
+    QGraphicsScene *gameScene;
+    QTimer *motionTimer;
+    QString direction;
+    int length = 5;
+
+
+public:
+    snakePart(QGraphicsScene *gameScene, QObject *parent = 0);
+
+
+private slots:
+    void motion();
+
+protected:
+   // void keyPressEvent(QKeyEvent *event);
+
+};
+
+#endif // SNAKEPART_H

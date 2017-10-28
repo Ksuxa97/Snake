@@ -1,0 +1,49 @@
+#include "snakepart.h"
+#include "coordinates.h"
+
+snakePart::snakePart(QGraphicsScene *gameScene, QObject *parent):QObject(parent)
+{
+    this->gameScene = gameScene;
+    setRect(0, 0, 10, 10);
+    setBrush(Qt::black);
+    direction = "UP";
+
+    motionTimer = new QTimer(this);
+    motionTimer->start(1000);
+    connect(motionTimer, SIGNAL(timeout()),this,SLOT(motion()));
+
+}
+
+void snakePart::motion(){
+    if(direction == "UP"){
+        setPos(x(), y()-10);
+    }
+    else if(direction == "DOWN"){
+        setPos(x(), y()+10);
+    }
+    else if(direction == "LEFT"){
+        setPos(x()-10, y());
+    }
+    else if(direction == "RIGHT"){
+        setPos(x()+10, y());
+    }
+}
+
+/*void Field::keyPressEvent(QKeyEvent *event){
+    switch (event->key()) {
+        case Qt::Key_Left:
+            direction = "LEFT";
+            break;
+        case Qt::Key_Right:
+            direction = "RIGHT";
+            break;
+        case Qt::Key_Down:
+            direction = "DOWN";
+            break;
+        case Qt::Key_Up:
+            direction = "UP";
+            break;
+     }
+}
+*/
+
